@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/Bakery"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Bakery" />
+        <item
+            android:id="@+id/Beverages"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Beverages" />
+        <item
+            android:id="@+id/Breakfast"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Breakfast" />
+        <item
+            android:id="@+id/Bulk"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Bulk" />
+        <item
+            android:id="@+id/cannedGoods"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Canned Goods" />
+        <item
+            android:id="@+id/dairyAndEgss"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Dairy and Eggs" />
+        <item
+            android:id="@+id/Deli"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Deli" />
+        <item
+            android:id="@+id/Frozen"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Frozen" />
+        <item
+            android:id="@+id/Household"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Household" />
+        <item
+            android:id="@+id/International"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="International" />
+        <item
+            android:id="@+id/meatAndSeafood"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Meat and Seafood" />
+        <item
+            android:id="@+id/Pantry"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Pantry" />
+        <item
+            android:id="@+id/personalCare"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Personal Care" />
+        <item
+            android:id="@+id/Pets"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Pets" />
+        <item
+            android:id="@+id/Produce"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Produce" />
+        <item
+            android:id="@+id/Snacks"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Snacks" />
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,161 @@
+{
+  "project_info": {
+    "project_number": "382266770478",
+    "firebase_url": "https://official-freshcart-database.firebaseio.com",
+    "project_id": "official-freshcart-database",
+    "storage_bucket": "official-freshcart-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382266770478:android:ea42e0d5495e9a33",
+        "android_client_info": {
+          "package_name": "shopwise.freshcartdriverofficial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382266770478-0adeuhcfm9remp7f4gt408b3euicht5o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "shopwise.freshcartdriverofficial",
+            "certificate_hash": "2b5e788d51b8154206d97935c0f8162be61b79c1"
+          }
+        },
+        {
+          "client_id": "382266770478-f9a856knjpd44681r1jbd1n5fhovqgp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8muOkTeNRrmccgXY7JWHV3AUsAe48kVU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382266770478-f9a856knjpd44681r1jbd1n5fhovqgp0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382266770478:android:fda95b773f40380c",
+        "android_client_info": {
+          "package_name": "com.example.hendryshanedeguia.freshcartcustomer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382266770478-r0bi1cqft8ivhijm4rc7m16g637il0sl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hendryshanedeguia.freshcartcustomer",
+            "certificate_hash": "25f96838e1efd38b3c67035e7d87bf23fd6e49f3"
+          }
+        },
+        {
+          "client_id": "382266770478-f9a856knjpd44681r1jbd1n5fhovqgp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8muOkTeNRrmccgXY7JWHV3AUsAe48kVU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382266770478-f9a856knjpd44681r1jbd1n5fhovqgp0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382266770478:android:ffe14fcb5c70d920",
+        "android_client_info": {
+          "package_name": "shopwise.freshcartcustomerfinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382266770478-f9a856knjpd44681r1jbd1n5fhovqgp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8muOkTeNRrmccgXY7JWHV3AUsAe48kVU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382266770478:android:36aa3855ac91e83e",
+        "android_client_info": {
+          "package_name": "shopwise.freshcartdriverfinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382266770478-f9a856knjpd44681r1jbd1n5fhovqgp0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8muOkTeNRrmccgXY7JWHV3AUsAe48kVU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
