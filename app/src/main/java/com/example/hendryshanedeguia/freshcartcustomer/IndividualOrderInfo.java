@@ -10,17 +10,22 @@ public class IndividualOrderInfo {
     public String prodPrice;
     public String orderItemID;
     public String prodImageURL;
+    public String subTotal;
+
 
 
     public IndividualOrderInfo() {
 
     }
-    public IndividualOrderInfo(String orderQuantity, String prodName, String prodPrice,String orderItemID,String prodImageURL) {
+
+
+    public IndividualOrderInfo(String orderQuantity, String prodName, String prodPrice, String orderItemID, String prodImageURL, String subTotal) {
         this.orderQuantity = orderQuantity;
         this.prodName = prodName;
         this.prodPrice = prodPrice;
         this.orderItemID = orderItemID;
         this.prodImageURL = prodImageURL;
+        this.subTotal = subTotal;
     }
 
     public String getOrderQuantity() {
@@ -41,5 +46,9 @@ public class IndividualOrderInfo {
 
     public String getProdImageURL() {
         return prodImageURL;
+    }
+
+    public String getSubTotal() {
+        return subTotal;
     }
 }

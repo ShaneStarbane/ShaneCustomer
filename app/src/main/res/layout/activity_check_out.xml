@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hendryshanedeguia.freshcartcustomer.CheckOut">
+
+    <Button
+        android:id="@+id/btnPlaceOrder"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="PLACE ORDER" />
+
+    <EditText
+        android:id="@+id/NoteForDriver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Note"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/COCashOnHand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Cash On Hand"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:layout_above="@+id/NoteForDriver"
+        android:layout_alignStart="@+id/NoteForDriver" />
+
+    <EditText
+        android:id="@+id/COClientAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Address"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:layout_above="@+id/COCashOnHand"
+        android:layout_alignStart="@+id/COCashOnHand" />
+
+    <TextView
+        android:id="@+id/COOrderID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/btnMembership"
+        android:layout_alignStart="@+id/btnMembership" />
+
+    <TextView
+        android:id="@+id/COTotalBillLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Bill"
+        android:layout_above="@+id/COClientAddress"
+        android:layout_alignStart="@+id/COClientAddress" />
+
+    <TextView
+        android:id="@+id/COTotalBill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/COTotalBillLabel"
+        android:layout_alignBottom="@+id/COTotalBillLabel"
+        android:layout_alignEnd="@+id/COClientAddress"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/CODiscountLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/COTotalBillLabel"
+        android:layout_alignStart="@+id/COTotalBillLabel"
+        android:text="Discount" />
+
+    <TextView
+        android:id="@+id/COPromosLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/CODiscountLabel"
+        android:layout_alignStart="@+id/CODiscountLabel"
+        android:text="Promos" />
+
+    <TextView
+        android:id="@+id/COgrossPayment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_above="@+id/COVAT"
+        android:layout_alignStart="@+id/COVAT" />
+
+    <TextView
+        android:id="@+id/COVAT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_above="@+id/COPromos"
+        android:layout_alignStart="@+id/COPromos" />
+
+    <TextView
+        android:id="@+id/COVATLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/COPromosLabel"
+        android:layout_alignStart="@+id/COPromosLabel"
+        android:text="VAT" />
+
+    <TextView
+        android:id="@+id/COgrossPaymentLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/COVATLabel"
+        android:layout_alignStart="@+id/COVATLabel"
+        android:text="Gross" />
+
+    <TextView
+        android:id="@+id/COCartKey"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/COCustName" />
+
+    <TextView
+        android:id="@+id/COCustName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/COgrossPaymentLabel"
+        android:layout_alignStart="@+id/COgrossPaymentLabel"
+        android:text="custName" />
+
+    <TextView
+        android:id="@+id/CODiscounts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_above="@+id/COTotalBill"
+        android:layout_alignStart="@+id/COTotalBill" />
+
+    <TextView
+        android:id="@+id/COPromos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_above="@+id/CODiscounts"
+        android:layout_alignStart="@+id/CODiscounts" />
+
+    <Button
+        android:id="@+id/btnPromo"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Enter Promo Code"
+        android:textSize="10sp"
+        android:layout_below="@+id/NoteForDriver"
+        android:layout_alignStart="@+id/NoteForDriver" />
+
+    <TextView
+        android:id="@+id/COPromoCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Promo Code"
+        android:layout_alignBaseline="@+id/btnPromo"
+        android:layout_alignBottom="@+id/btnPromo"
+        android:layout_alignStart="@+id/COMemberShip" />
+
+    <Button
+        android:id="@+id/btnMembership"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignEnd="@+id/btnPromo"
+        android:layout_alignStart="@+id/btnPromo"
+        android:layout_below="@+id/btnPromo"
+        android:text="Membership Code"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/COMemberShip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnMembership"
+        android:layout_alignBottom="@+id/btnMembership"
+        android:layout_marginStart="13dp"
+        android:layout_toEndOf="@+id/btnMembership"
+        android:text="No Membership" />
+</RelativeLayout>

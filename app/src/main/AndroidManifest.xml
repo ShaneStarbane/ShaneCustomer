@@ -26,7 +26,10 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme" />
         <activity android:name=".Product_Details" />
-        <activity android:name=".MyCart"></activity>
+        <activity android:name=".MyCart" />
+        <activity android:name=".CheckOut" />
+        <activity android:name=".MyOrder" />
+        <activity android:name=".MyOrdersList"></activity>
     </application>
 
 </manifest>

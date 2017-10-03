@@ -4,70 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_green_light"
+    android:backgroundTint="@android:color/holo_green_light"
     tools:context="com.example.hendryshanedeguia.freshcartcustomer.MyCart">
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="117dp"
-        android:layout_height="31dp"
-        android:layout_marginRight="215dp"
-        android:layout_marginTop="8dp"
-        android:text="My Cart"
-        android:textAlignment="textStart"
-        android:textSize="32sp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
 
     <ImageView
         android:id="@+id/ivIcon"
         android:layout_width="39dp"
         android:layout_height="33dp"
-        android:layout_marginLeft="0dp"
-        app:layout_constraintLeft_toRightOf="@+id/textView3"
         app:srcCompat="@drawable/ic_menu_send"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/lvOrders"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.075" />
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="3dp" />
 
     <TextView
         android:id="@+id/tvCartKey"
-        android:layout_width="200dp"
-        android:layout_height="27dp"
+        android:layout_width="50dp"
+        android:layout_height="25dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:text="Order ID"
+        android:text="default"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/lvOrders"
-        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintLeft_toRightOf="@+id/ivIcon"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="12dp" />
-
-    <ListView
-        android:id="@+id/lvOrders"
-        android:layout_width="377dp"
-        android:layout_height="439dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintVertical_bias="0.695" />
 
     <Button
         android:id="@+id/btnCheckOut"
@@ -77,9 +41,78 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:text="Button"
+        android:text="Check Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lvOrders" />
+        app:layout_constraintTop_toBottomOf="@+id/lvOrders"
+        app:layout_constraintVertical_bias="0.615" />
+
+    <ListView
+        android:id="@+id/lvOrders"
+        android:layout_width="371dp"
+        android:layout_height="459dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/common_google_signin_btn_text_dark_pressed"
+        android:visibility="visible"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/tvNothingMessage"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="261dp"
+        android:text="NO ITEMS IN CART"
+        android:textAlignment="center"
+        android:textColor="@color/common_google_signin_btn_text_light_default"
+        android:textSize="40sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="119dp"
+        android:layout_height="41dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:text="My Cart"
+        android:textAlignment="textStart"
+        android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+        android:textSize="32sp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toRightOf="@+id/ivIcon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSubTotalLabel"
+        android:layout_width="78dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/holo_green_dark"
+        android:text="default"
+        android:textAlignment="center"
+        android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/lvOrders"
+        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintLeft_toRightOf="@+id/ivIcon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         //Initializing
         mDatabaseRef = getInstance().getReference("Products").child("Bakery");
         productList =  new ArrayList<>();
@@ -56,9 +57,11 @@ public class MainActivity extends AppCompatActivity
                 progressDialog.dismiss();
 
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+
                     ProductInformation PI = snapshot.getValue(ProductInformation.class);
                     productList.add(PI);
                 }
+
                 adapter = new ProductListAdapter(MainActivity.this,R.layout.product_layout,productList);
                 lv.setAdapter(adapter);
             }
@@ -98,6 +101,15 @@ public class MainActivity extends AppCompatActivity
                 String prodCategory = tvProdCategory.getText().toString();
                 String imageURL = tvImageURL.getText().toString();
                 Intent prodDetails =  new Intent(getApplicationContext(),Product_Details.class);
+                Intent thisIntent = getIntent();
+                if(thisIntent.hasExtra("cartKey")){
+                    String theKey = thisIntent.getStringExtra("cartKey");
+                    prodDetails.putExtra("cartKey",theKey);
+                }
+                if(thisIntent.hasExtra("currentBill")){
+                    String theBill = thisIntent.getStringExtra("currentBill");
+                    prodDetails.putExtra("currentBill",theBill);
+                }
                 prodDetails.putExtra("prodName",prodName);
                 prodDetails.putExtra("prodDes",prodDes);
                 prodDetails.putExtra("prodPrice",prodPrice);
@@ -105,6 +117,7 @@ public class MainActivity extends AppCompatActivity
                 prodDetails.putExtra("prodID",prodID);
                 prodDetails.putExtra("prodCategory",prodCategory);
                 prodDetails.putExtra("imageURL",imageURL);
+
 
                 startActivity(prodDetails);
 
@@ -141,6 +154,45 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        if (id == R.id.myCart) {
+            Intent intent = getIntent();
+            if(intent.hasExtra("cartKey")) {
+                String cartKey = intent.getStringExtra("cartKey");
+                Intent myCartPhase = new Intent(getApplicationContext(),MyCart.class);
+                myCartPhase.putExtra("cartKey",cartKey);
+                if(intent.hasExtra("currentBill")){
+                    String theBill = intent.getStringExtra("currentBill");
+                    myCartPhase.putExtra("currentBill",theBill);
+                }
+                startActivity(myCartPhase);
+            }
+
+            else{
+                Intent myCartPhase = new Intent(getApplicationContext(),MyCart.class);
+                startActivity(myCartPhase);
+            }
+        }
+        if (id == R.id.checkOut) {
+            Intent intent = getIntent();
+            if(intent.hasExtra("cartKey")) {
+                String cartKey = intent.getStringExtra("cartKey");
+                Intent checkOutPhase = new Intent(getApplicationContext(),CheckOut.class);
+                checkOutPhase.putExtra("cartKey",cartKey);
+                if(intent.hasExtra("currentBill")){
+                    String theBill = intent.getStringExtra("currentBill");
+                    checkOutPhase.putExtra("currentBill",theBill);
+                }
+                startActivity(checkOutPhase);
+            }
+
+            else{
+                Intent checkOutPhase = new Intent(getApplicationContext(),CheckOut.class);
+                startActivity(checkOutPhase);
+            }
+        }
+        if (id == R.id.action_settings) {
+            return true;
+        }
         if (id == R.id.action_settings) {
             return true;
         }

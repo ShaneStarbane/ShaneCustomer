@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.hendryshanedeguia.freshcartcustomer.MyOrder">
+
+    <Button
+        android:id="@+id/btnMOCancelOrder"
+        android:layout_width="362dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Cancel Order"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listView"
+        app:layout_constraintVertical_bias="0.955"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/listView" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="370dp"
+        android:layout_height="234dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.375"
+        android:layout_above="@+id/btnMOCancelOrder"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/tvMOTotalBill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="126dp"
+        android:layout_alignBaseline="@+id/tvMOCashOnHandLabel"
+        android:layout_alignBottom="@+id/tvMOCashOnHandLabel"
+        android:layout_toEndOf="@+id/tvMOCashOnHandLabel" />
+
+    <TextView
+        android:id="@+id/tvMOUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="126dp"
+        android:layout_above="@+id/tvMOAddress"
+        android:layout_alignStart="@+id/tvMOAddress" />
+
+    <TextView
+        android:id="@+id/tvMOGrossLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvMOVATLabel"
+        android:layout_alignStart="@+id/tvMOVATLabel"
+        android:text="Gross"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="126dp" />
+
+    <TextView
+        android:id="@+id/tvMOVATLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvMOPromoLabel"
+        android:layout_alignStart="@+id/tvMOPromoLabel"
+        android:text="VAT"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="126dp" />
+
+    <TextView
+        android:id="@+id/tvMOPromoLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvMODiscountLabel"
+        android:layout_alignStart="@+id/tvMODiscountLabel"
+        android:text="Promo"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="126dp" />
+
+    <TextView
+        android:id="@+id/tvMODiscountLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvMOTotalBillLabel"
+        android:layout_alignStart="@+id/tvMOTotalBillLabel"
+        android:text="Discount"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="126dp" />
+
+    <TextView
+        android:id="@+id/tvMOTotalBillLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Bill"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="126dp"
+        android:layout_above="@+id/tvMOTotalBill"
+        android:layout_alignStart="@+id/tvMOCashOnHandLabel" />
+
+    <TextView
+        android:id="@+id/tvMOCashOnHandLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/button2"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="196dp"
+        android:text="Cash On Hand"
+        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteY="126dp" />
+
+    <TextView
+        android:id="@+id/tvMOChangeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvMOCashOnHandLabel"
+        android:layout_below="@+id/tvMOCashOnHandLabel"
+        android:text="Change" />
+
+    <TextView
+        android:id="@+id/tvMOChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_below="@+id/tvMOTotalBill"
+        android:layout_alignStart="@+id/tvMOTotalBill"
+        android:layout_alignBottom="@+id/tvMOChangeLabel" />
+
+    <TextView
+        android:id="@+id/tvMOVAT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvMOPromoLabel"
+        android:layout_alignStart="@+id/tvMOGross"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvMOGross"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_above="@+id/tvMOVAT"
+        android:layout_alignStart="@+id/tvMOTotalBill" />
+
+    <TextView
+        android:id="@+id/tvMOPromo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvMOVAT"
+        android:layout_below="@+id/tvMOVAT"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvMODiscount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvMOPromo"
+        android:layout_below="@+id/tvMOPromo"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_below="@+id/tvMODiscount"
+        android:layout_alignStart="@+id/tvMOTotalBill" />
+
+    <TextView
+        android:id="@+id/tvMOAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvMOGrossLabel"
+        android:layout_alignStart="@+id/tvMOGrossLabel"
+        android:layout_marginBottom="21dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvMOOrderID"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="TextView"
+        android:layout_above="@+id/tvMOUsername"
+        android:layout_alignStart="@+id/tvMOUsername" />
+</RelativeLayout>

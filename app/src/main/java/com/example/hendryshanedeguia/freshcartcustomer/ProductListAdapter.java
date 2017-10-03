@@ -53,10 +53,6 @@ public class ProductListAdapter extends ArrayAdapter<ProductInformation> {
 
         Glide.with(context).load(listProducts.get(position).getImageURL()).into(ivPic);
 
-
-
-
-
         return v;
 
 
