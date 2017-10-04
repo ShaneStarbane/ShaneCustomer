@@ -24,8 +24,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -48,6 +51,8 @@ public class Register extends AppCompatActivity {
     public static  final String Storage_Path ="Customer_images/";
     public static  final String Database_Path ="Customers";
     public static  final int Request_Code = 1234;
+    FirebaseUser mUser;
+
     String cust_email,cust_password,confirmEmail,confirmPass,cust_address,cust_contact,cust_Username;
 
     @Override
@@ -68,6 +73,7 @@ public class Register extends AppCompatActivity {
         ivImage =  (ImageView) findViewById(R.id.ivImage);
         storageReference = FirebaseStorage.getInstance().getReference(Storage_Path);
         btnImage = (Button) findViewById(R.id.btnImage);
+
     }
     @SuppressWarnings("VisibleForTests")
     public void btnSignUp_Click(View v){
@@ -80,10 +86,8 @@ public class Register extends AppCompatActivity {
         cust_contact = etContactNum.getText().toString().trim();
         cust_Username = etUsername.getText().toString().trim();
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
-
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(cust_email);
-
         //Checking if something is wrong
         if (TextUtils.isEmpty(cust_email)){
             Toast.makeText(getApplicationContext(),"Email should not be empty",Toast.LENGTH_LONG).show();
@@ -124,6 +128,8 @@ public class Register extends AppCompatActivity {
 
         }
 
+
+
             final ProgressDialog dialog = new ProgressDialog(this);
             dialog.setMessage("Registering user . . . ");
             dialog.show();
@@ -135,39 +141,46 @@ public class Register extends AppCompatActivity {
 
                     dialog.dismiss();
 
-                    String cust_email = etEmail.getText().toString().trim();
+                    final String cust_email = etEmail.getText().toString().trim();
                     String cust_password = etPassword.getText().toString().trim();
-                    String cust_address = etAddress.getText().toString().trim();
-                    String cust_contact = etContactNum.getText().toString().trim();
-                    String cust_Username = etUsername.getText().toString().trim();
-                    String imageURL = taskSnapshot.getDownloadUrl().toString();
+                    final String cust_address = etAddress.getText().toString().trim();
+                    final String cust_contact = etContactNum.getText().toString().trim();
+                    final String cust_Username = etUsername.getText().toString().trim();
+                    final String imageURL = taskSnapshot.getDownloadUrl().toString();
+                    final String uploadID = databaseReference.push().getKey();
 
-                    CustomerInformation  CustInfo =  new CustomerInformation(cust_email,cust_contact,cust_address,imageURL,cust_Username);
-                    String uploadID = databaseReference.push().getKey();
-                    databaseReference.child(uploadID).setValue(CustInfo);
-                    firebaseAuth.createUserWithEmailAndPassword(cust_email,cust_password);
-                    etUsername.setText("");
-                    etPassword.setText("");
-                    etConfirmPassword.setText("");
-                    etEmail.setText("");
-                    etConfirmEmail.setText("");
-                    etAddress.setText("");
-                    etContactNum.setText("");
-                    ivImage.setImageBitmap(null);
-                    Toast.makeText(getApplicationContext(), "Registration success!", Toast.LENGTH_LONG).show();
-
-
-
+                    firebaseAuth.createUserWithEmailAndPassword(cust_email,cust_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()){
+                                FirebaseUser fbu = FirebaseAuth.getInstance().getCurrentUser();
+                                String uID = fbu.getUid();
+                                CustomerInformation  CustInfo =  new CustomerInformation(cust_email,cust_contact,cust_address,imageURL,cust_Username,uID);
+                                databaseReference.child(uID).setValue(CustInfo);
+                                etUsername.setText("");
+                                etPassword.setText("");
+                                etConfirmPassword.setText("");
+                                etEmail.setText("");
+                                etConfirmEmail.setText("");
+                                etAddress.setText("");
+                                etContactNum.setText("");
+                                ivImage.setImageBitmap(null);
+                                Toast.makeText(getApplicationContext(), "Registration success!", Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "Something went wrong @~@", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
                 }
-            }) .addOnFailureListener(new OnFailureListener() {
+            }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(), "Something went wrong. Please try again.", Toast.LENGTH_LONG).show();
 
                 }
-            })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
 
                         @Override
                         public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
@@ -175,12 +188,6 @@ public class Register extends AppCompatActivity {
                             dialog.setMessage("Registering user " + (int)progress+"%");
                         }
                     });
-
-
-
-
-
-
 
 
     }
@@ -206,7 +213,7 @@ public class Register extends AppCompatActivity {
         }
     }
     private void registerUser(){
-     /*
+
       //  Toast.makeText(getApplicationContext(),"Hi...",Toast.LENGTH_LONG).show();
         String cust_email = etEmail.getText().toString().trim();
         String cust_password = etPassword.getText().toString().trim();
@@ -235,8 +242,9 @@ public class Register extends AppCompatActivity {
             }
         });
 
-       */
+
     }
+
 
     private void saveCustomerInformation(){
         /*

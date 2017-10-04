@@ -19,12 +19,12 @@ import java.util.List;
  * Created by HendryShanedeGuia on 03/10/2017.
  */
 
-public class IteneraryListAdapter extends ArrayAdapter<IndividualOrderInfo> {
+public class ItineraryListAdapter extends ArrayAdapter<IndividualOrderInfo> {
     private Activity context;
     private int resource;
     private List<IndividualOrderInfo> listOrders;
 
-    public IteneraryListAdapter(@NonNull Activity context, @LayoutRes int resource, @NonNull List<IndividualOrderInfo> objects) {
+    public ItineraryListAdapter(@NonNull Activity context, @LayoutRes int resource, @NonNull List<IndividualOrderInfo> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;

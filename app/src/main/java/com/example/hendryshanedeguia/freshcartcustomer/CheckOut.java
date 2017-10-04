@@ -3,10 +3,12 @@ package com.example.hendryshanedeguia.freshcartcustomer;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +26,7 @@ public class CheckOut extends AppCompatActivity {
     Button btnPlaceOrder;
     DatabaseReference allOrdersDBF;
     DatabaseReference pendingOrdersDBF;
+    DatabaseReference customersDBF;
     EditText etCOCashOnHand,etCOAddress,etCONote;
 
 
@@ -33,8 +36,12 @@ public class CheckOut extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out);
+        final Intent thisIntent = getIntent();
         NumberFormat formatter = new DecimalFormat("#0.00");
+        String user = thisIntent.getStringExtra("user");
         pendingOrdersDBF = FirebaseDatabase.getInstance().getReference("Orders").child("Pending Orders");
+        customersDBF = FirebaseDatabase.getInstance().getReference("Customers").child(user);
+
 
         VAT =  (TextView) findViewById(R.id.COVAT);
         btnPlaceOrder = (Button) findViewById(R.id.btnPlaceOrder);
@@ -52,7 +59,7 @@ public class CheckOut extends AppCompatActivity {
 
 
 
-        final Intent thisIntent = getIntent();
+
         if(thisIntent.hasExtra("cartKey")){
             String theKey = thisIntent.getStringExtra("cartKey");
             tvCartKey.setText(theKey);
@@ -64,6 +71,7 @@ public class CheckOut extends AppCompatActivity {
             VAT.setText(String.valueOf(formatter.format(vatBill)));
             Gross.setText(theBill);
         }
+
         Promo.setText("0.00");
         Discount.setText("0.00");
         allOrdersDBF = FirebaseDatabase.getInstance().getReference("Orders").child("All Orders").child(tvCartKey.getText().toString());
@@ -96,22 +104,48 @@ public class CheckOut extends AppCompatActivity {
                 if (thisIntent.hasExtra("cartKey")) {
                     String theKey = thisIntent.getStringExtra("cartKey");
                     tvCartKey.setText(theKey);
+                    String user = thisIntent.getStringExtra("user");
+                    customersDBF.child(user);
+                    Toast.makeText(getApplicationContext(),user+"",Toast.LENGTH_SHORT).show();
 
 
 
                     Map updateRemainingDetails = new HashMap();
+                    String pendingUID = pendingOrdersDBF.push().getKey();
                     updateRemainingDetails.put("orderStatus", "Pending");
                     updateRemainingDetails.put("custAddress",etCOAddress.getText().toString());
                     updateRemainingDetails.put("cashOnHand",etCOCashOnHand.getText().toString());
                     updateRemainingDetails.put("noteForDriver",etCONote.getText().toString());
+                    updateRemainingDetails.put("orderGross",Gross.getText().toString());
+                    updateRemainingDetails.put("orderBill",TotalBill.getText().toString());
+                    updateRemainingDetails.put("pendingID",pendingUID);
+
                     allOrdersDBF.updateChildren(updateRemainingDetails);
-                    String pendingUID = pendingOrdersDBF.push().getKey();
+
                     Map addedData = new HashMap();
                     addedData.put("orderID",theKey);
                     pendingOrdersDBF.child(pendingUID).setValue(addedData);
+
+                    Map addToHistory = new HashMap();
+                    addToHistory.put("orderID",theKey);
+                    String uID = customersDBF.push().getKey();
+                    customersDBF.child("order(s)").child(uID).setValue(addToHistory);
+
                 }
             }
         });
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+
+            Intent thisIntent = getIntent();
+            String user = thisIntent.getStringExtra("user");
+            Intent back = new Intent(getApplicationContext(),MainActivity.class);
+            back.putExtra("user",user);
+            startActivity(back);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
 

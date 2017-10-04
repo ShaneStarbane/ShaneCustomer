@@ -29,7 +29,7 @@ public class Product_Details extends AppCompatActivity {
 
     public DatabaseReference tempDBF;
     public DatabaseReference IndividualTempDBF;
-    public DatabaseReference SureOrders;
+    public DatabaseReference customerDBF;
 
 
     private ProductListAdapter adapter;
@@ -45,6 +45,10 @@ public class Product_Details extends AppCompatActivity {
         setContentView(R.layout.activity_product__details);
         IndividualTempDBF = FirebaseDatabase.getInstance().getReference("Orders");
         tempDBF =  FirebaseDatabase.getInstance().getReference("Orders");
+        Intent thisIntent = getIntent();
+        String user = thisIntent.getStringExtra("user");
+        customerDBF = FirebaseDatabase.getInstance().getReference().child("Customers").child(user);
+
 
          tvName = (TextView) findViewById(R.id.tvName);
          tvDes = (TextView) findViewById(R.id.tvDescription);
@@ -141,8 +145,6 @@ public class Product_Details extends AppCompatActivity {
                         tvTotalBill.setText(String.valueOf(formatter.format(newValue)));
                     }
 
-
-
                     //Store
                     OrderInformation oi = new OrderInformation(uploadID,tvTotalBill.getText().toString(),"null","null","null","Shane","null","null","null","0.00","0.00","0.00","null");
                     IndividualOrderInfo ioi = new IndividualOrderInfo(etQuantity.getText().toString(),prodName,prodPrice,uploadID,imageURL,totalPriceConverted);
@@ -170,16 +172,22 @@ public class Product_Details extends AppCompatActivity {
                         Map currentCart = new HashMap();
                         currentCart.put("orderBill",tvTotalBill.getText().toString());
                         tempDBF.child("All Orders").child(tvCartKeyProdDetails.getText().toString()).updateChildren(currentCart);
+
                     }
                     //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                     IndividualOrderInfo ioi = new IndividualOrderInfo(etQuantity.getText().toString(),prodName,prodPrice,uploadID,imageURL,totalPriceConverted);
                     IndividualTempDBF.child("All Orders").child(currentCartKey).child("order(s)").child(uploadID).setValue(ioi);
+
+
                 }
 
 
 
                 Intent nextPhase = new Intent(getApplicationContext(),MainActivity.class);
+                Intent thisIntent = getIntent();
+                String user = thisIntent.getStringExtra("user");
                 //nextPhase.putExtra("currentBill",currentBill);
+                nextPhase.putExtra("user",user);
                 nextPhase.putExtra("cartKey",tvCartKeyProdDetails.getText(). toString());
                 nextPhase.putExtra("currentBill",tvTotalBill.getText().toString());
                 startActivity(nextPhase);
@@ -199,6 +207,9 @@ public class Product_Details extends AppCompatActivity {
                    if(!TextUtils.equals(currentBill,"default")){
                         nextPhase.putExtra("currentBill",currentBill);
                     }
+                    Intent thisIntent = getIntent();
+                    String user = thisIntent.getStringExtra("user");
+                    nextPhase.putExtra("user",user);
                     nextPhase.putExtra("cartKey",tvCartKeyProdDetails.getText().toString());
                     startActivity(nextPhase);
                 }

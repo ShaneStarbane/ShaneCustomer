@@ -3,6 +3,7 @@ package com.example.hendryshanedeguia.freshcartcustomer;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,8 +44,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
+        Intent thisIntent = getIntent();
+        String userID = thisIntent.getStringExtra("user");
         //Initializing
         mDatabaseRef = getInstance().getReference("Products").child("Bakery");
         productList =  new ArrayList<>();
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         lv = (ListView) findViewById(R.id.lv);
         progressDialog.setMessage("Loading items");
         progressDialog.show();
+        Toast.makeText(getApplicationContext(),userID+"",Toast.LENGTH_LONG).show();
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -81,7 +84,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -110,6 +113,8 @@ public class MainActivity extends AppCompatActivity
                     String theBill = thisIntent.getStringExtra("currentBill");
                     prodDetails.putExtra("currentBill",theBill);
                 }
+                String user = thisIntent.getStringExtra("user");
+                prodDetails.putExtra("user",user);
                 prodDetails.putExtra("prodName",prodName);
                 prodDetails.putExtra("prodDes",prodDes);
                 prodDetails.putExtra("prodPrice",prodPrice);
@@ -157,6 +162,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.myCart) {
             Intent intent = getIntent();
             if(intent.hasExtra("cartKey")) {
+                Intent thisIntent = getIntent();
+                String user = thisIntent.getStringExtra("user");
                 String cartKey = intent.getStringExtra("cartKey");
                 Intent myCartPhase = new Intent(getApplicationContext(),MyCart.class);
                 myCartPhase.putExtra("cartKey",cartKey);
@@ -164,20 +171,28 @@ public class MainActivity extends AppCompatActivity
                     String theBill = intent.getStringExtra("currentBill");
                     myCartPhase.putExtra("currentBill",theBill);
                 }
+                myCartPhase.putExtra("user",user);
                 startActivity(myCartPhase);
             }
 
             else{
                 Intent myCartPhase = new Intent(getApplicationContext(),MyCart.class);
+                Intent thisIntent = getIntent();
+                String user = thisIntent.getStringExtra("user");
+                myCartPhase.putExtra("user",user);
                 startActivity(myCartPhase);
             }
         }
         if (id == R.id.checkOut) {
             Intent intent = getIntent();
             if(intent.hasExtra("cartKey")) {
+                Intent thisIntent = getIntent();
+                String user = thisIntent.getStringExtra("user");
+
                 String cartKey = intent.getStringExtra("cartKey");
                 Intent checkOutPhase = new Intent(getApplicationContext(),CheckOut.class);
                 checkOutPhase.putExtra("cartKey",cartKey);
+                checkOutPhase.putExtra("user",user);
                 if(intent.hasExtra("currentBill")){
                     String theBill = intent.getStringExtra("currentBill");
                     checkOutPhase.putExtra("currentBill",theBill);
@@ -187,15 +202,23 @@ public class MainActivity extends AppCompatActivity
 
             else{
                 Intent checkOutPhase = new Intent(getApplicationContext(),CheckOut.class);
+                Intent thisIntent = getIntent();
+                String user = thisIntent.getStringExtra("user");
+                checkOutPhase.putExtra("user",user);
                 startActivity(checkOutPhase);
             }
         }
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.myOrders) {
+            Intent myOrdersPhase = new Intent(getApplicationContext(),MyOrdersList.class);
+            Intent thisIntent = getIntent();
+            String user = thisIntent.getStringExtra("user");
+            myOrdersPhase.putExtra("user",user);
+            startActivity(myOrdersPhase);
+
         }
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -271,5 +294,17 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK){
+
+            Intent thisIntent = getIntent();
+            String user = thisIntent.getStringExtra("user");
+            Intent back = new Intent(getApplicationContext(),MainActivity.class);
+            back.putExtra("user",user);
+            startActivity(back);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

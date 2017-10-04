@@ -94,15 +94,13 @@ public class MyCart extends AppCompatActivity {
 //Change1
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        String currentBill= tvSubTotalLabel.getText().toString();
         if(keyCode == KeyEvent.KEYCODE_BACK){
-            if(!TextUtils.equals(currentBill,"default")){
-                Intent back = new Intent(MyCart.this,MainActivity.class);
-                back.putExtra("currentBill",currentBill);
-                back.putExtra("cartKey",tvCartKey.getText().toString());
-                startActivity(back);
-            }
 
+                Intent thisIntent = getIntent();
+                String user = thisIntent.getStringExtra("user");
+                Intent back = new Intent(getApplicationContext(),MainActivity.class);
+                back.putExtra("user",user);
+                startActivity(back);
         }
         return super.onKeyDown(keyCode, event);
     }
