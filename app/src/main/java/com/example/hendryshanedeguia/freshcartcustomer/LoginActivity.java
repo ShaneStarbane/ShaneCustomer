@@ -29,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
         etUseremail = (EditText) findViewById(R.id.etUserEmail);
         etUserPass = (EditText) findViewById(R.id.etUserPass);
         btnLogin =  (Button) findViewById(R.id.btnLogin);
+        etUseremail.setText("bokides@gmail.com");
+        etUserPass.setText("qqqqqq");
         fba = FirebaseAuth.getInstance();
 
         //Change this after
@@ -59,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser fbu = FirebaseAuth.getInstance().getCurrentUser();
                             String userID =fbu.getUid();
                             Intent nextPhase =  new Intent(LoginActivity.this,MainActivity.class);
-                            nextPhase.putExtra("user",userID);
+                            nextPhase.putExtra("user","qnlHdvPLuUT9IXyMGWZlqQMzKC92");
                             startActivity(nextPhase);
                         }else{
                             Toast.makeText(LoginActivity.this, "Oops! Something went wrong. Please try again!", Toast.LENGTH_SHORT).show();

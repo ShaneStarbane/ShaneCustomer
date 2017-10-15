@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("Fresh Cart Customer");
         Intent thisIntent = getIntent();
         String userID = thisIntent.getStringExtra("user");
         //Initializing
@@ -51,14 +52,10 @@ public class MainActivity extends AppCompatActivity
         productList =  new ArrayList<>();
         progressDialog = new ProgressDialog(this);
         lv = (ListView) findViewById(R.id.lv);
-        progressDialog.setMessage("Loading items");
-        progressDialog.show();
-        Toast.makeText(getApplicationContext(),userID+"",Toast.LENGTH_LONG).show();
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 progressDialog.dismiss();
-
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()){
 
                     ProductInformation PI = snapshot.getValue(ProductInformation.class);
@@ -92,8 +89,8 @@ public class MainActivity extends AppCompatActivity
                 TextView tvDes = (TextView)  view.findViewById(R.id.tvDescription);
                 TextView tvPrice = (TextView)  view.findViewById(R.id.tvPrice);
                 TextView tvCurrency = (TextView)  view.findViewById(R.id.tvCurrency);
-                TextView tvProdID = (TextView)  view.findViewById(R.id.tvProdID);
-                TextView tvProdCategory = (TextView)  view.findViewById(R.id.tvProdCategory);
+                TextView tvProdID = (TextView)  view.findViewById(R.id.tvID2);
+                TextView tvProdCategory = (TextView)  view.findViewById(R.id.tvCategory2);
                 TextView tvImageURL = (TextView)  view.findViewById(R.id.tvImageUrl);
 
                 String prodName = tvName.getText().toString();
@@ -167,10 +164,9 @@ public class MainActivity extends AppCompatActivity
                 String cartKey = intent.getStringExtra("cartKey");
                 Intent myCartPhase = new Intent(getApplicationContext(),MyCart.class);
                 myCartPhase.putExtra("cartKey",cartKey);
-                if(intent.hasExtra("currentBill")){
-                    String theBill = intent.getStringExtra("currentBill");
-                    myCartPhase.putExtra("currentBill",theBill);
-                }
+                String theBill = intent.getStringExtra("currentBill");
+                myCartPhase.putExtra("currentBill",theBill);
+
                 myCartPhase.putExtra("user",user);
                 startActivity(myCartPhase);
             }
@@ -204,15 +200,19 @@ public class MainActivity extends AppCompatActivity
                 Intent checkOutPhase = new Intent(getApplicationContext(),CheckOut.class);
                 Intent thisIntent = getIntent();
                 String user = thisIntent.getStringExtra("user");
+                String cartKey = thisIntent.getStringExtra("cartKey");
                 checkOutPhase.putExtra("user",user);
+                checkOutPhase.putExtra("cartKey",cartKey);
                 startActivity(checkOutPhase);
             }
         }
         if (id == R.id.myOrders) {
             Intent myOrdersPhase = new Intent(getApplicationContext(),MyOrdersList.class);
             Intent thisIntent = getIntent();
+            String cartKey = thisIntent.getStringExtra("cartKey");
             String user = thisIntent.getStringExtra("user");
             myOrdersPhase.putExtra("user",user);
+            myOrdersPhase.putExtra("cartKey",cartKey);
             startActivity(myOrdersPhase);
 
         }

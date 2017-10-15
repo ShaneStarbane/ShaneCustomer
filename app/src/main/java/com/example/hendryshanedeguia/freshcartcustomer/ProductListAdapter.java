@@ -44,10 +44,14 @@ public class ProductListAdapter extends ArrayAdapter<ProductInformation> {
         TextView tvCurrency = (TextView) v.findViewById(R.id.tvCurrency);
         ImageView ivPic =  (ImageView) v.findViewById(R.id.ivPic);
         TextView tvImageURL = (TextView) v.findViewById(R.id.tvImageUrl);
+        TextView tvID2 = (TextView) v.findViewById(R.id.tvID2);
+        TextView tvCategory2 = (TextView) v.findViewById(R.id.tvCategory2);
 
         tvName.setText(listProducts.get(position).getProdName());
         tvDes.setText(listProducts.get(position).getProdDes());
         tvPrice.setText(listProducts.get(position).getProdPrice());
+        tvID2.setText(listProducts.get(position).getProdID());
+        tvCategory2.setText(listProducts.get(position).getProdCategory());
         tvCurrency.setText("₱");
         tvImageURL.setText(listProducts.get(position).getImageURL());
 

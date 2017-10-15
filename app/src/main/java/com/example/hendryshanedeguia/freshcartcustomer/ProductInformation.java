@@ -48,4 +48,8 @@ public class ProductInformation {
     public String getProdID() {
         return prodID;
     }
+
+    public String getProdCategory() {
+        return prodCategory;
+    }
 }

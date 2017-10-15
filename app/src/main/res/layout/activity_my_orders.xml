@@ -26,10 +26,9 @@
     <ListView
         android:id="@+id/lvMO"
         android:layout_width="370dp"
-        android:layout_height="234dp"
-        android:layout_above="@+id/btnMOCancelOrder"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="12dp"
+        android:layout_height="210dp"
+        android:layout_alignStart="@+id/btnMOCancelOrder"
+        android:layout_below="@+id/tvPendingID"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -135,9 +134,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:layout_below="@+id/tvMOTotalBill"
         android:layout_alignStart="@+id/tvMOTotalBill"
-        android:layout_alignBottom="@+id/tvMOChangeLabel" />
+        android:layout_alignBottom="@+id/tvMOChangeLabel"
+        android:layout_below="@+id/tvMOTotalBill" />
 
     <TextView
         android:id="@+id/tvMOVAT"
@@ -167,12 +166,12 @@
         android:id="@+id/tvMODiscount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/tvMOPromo"
+        android:text="TextView"
         android:layout_below="@+id/tvMOPromo"
-        android:text="TextView" />
+        android:layout_alignStart="@+id/tvMOPromo" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/tvMOBill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
@@ -196,4 +195,31 @@
         android:text="TextView"
         android:layout_above="@+id/tvMOUsername"
         android:layout_alignStart="@+id/tvMOUsername" />
+
+    <TextView
+        android:id="@+id/tvPendingID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvMOChange"
+        android:layout_marginStart="54dp"
+        android:text="TextView"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/tvCancels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvPendingID"
+        android:layout_toEndOf="@+id/tvPendingID"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/btnTrackOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnMOCancelOrder"
+        android:layout_alignEnd="@+id/btnMOCancelOrder"
+        android:layout_alignStart="@+id/btnMOCancelOrder"
+        android:text="TrackOrder" />
 </RelativeLayout>

@@ -36,9 +36,11 @@ public class OrderHistoryAdapter extends ArrayAdapter<OrderInformation> {
         View v = inflater.inflate(resource,parent, false);
         TextView tvOrderID = (TextView) v.findViewById(R.id.tvMOPreOrderID);
         TextView tvOrderBill = (TextView) v.findViewById(R.id.tvMOPreBill);
+        TextView tvOrderStatus = (TextView) v.findViewById(R.id.tvMOPreOrderStatus);
 
         tvOrderID.setText(listOrders.get(position).getOrderID());
         tvOrderBill.setText(listOrders.get(position).getOrderBill());
+        tvOrderStatus.setText(listOrders.get(position).getOrderStatus());
 
 
 

@@ -17,13 +17,18 @@ public class OrderInformation {
     public String promo;
     public String discount;
     public String orderVAT;
-    public String deliveredBy;
+    public String orderDriverUsername;
+    public String orderDriverID;
+    public String custID;
+    public String orderEntryID;
+
+
 
 
 
     public OrderInformation() {
     }
-    public OrderInformation(String orderID, String orderGross, String custContact, String custAddress, String custImageUrl, String custUsername,String orderStatus,String cashOnHand, String noteForDriver, String promo, String discount,String orderVAT, String deliveredBy) {
+    public OrderInformation(String orderID, String orderGross, String custContact, String custAddress, String custImageUrl, String custUsername,String orderStatus,String cashOnHand, String noteForDriver, String promo, String discount,String orderVAT, String orderDriverUsername,String orderDriverID,String custID,String orderEntryID) {
         this.orderID = orderID;
         this.orderGross = orderGross;
         this.custContact = custContact;
@@ -36,7 +41,75 @@ public class OrderInformation {
         this.promo = promo;
         this.discount = discount;
         this.orderVAT = orderVAT;
-        this.deliveredBy = deliveredBy;
+        this.orderDriverUsername = orderDriverUsername;
+        this.orderDriverID = orderDriverID;
+        this.custID = custID;
+        this.orderEntryID = orderEntryID;
+    }
+
+
+    public String getOrderEntryID() {
+        return orderEntryID;
+    }
+
+    public void setOrderEntryID(String orderEntryID) {
+        this.orderEntryID = orderEntryID;
+    }
+
+    public String getOrderDriverUsername() {
+        return orderDriverUsername;
+    }
+
+    public String getOrderDriverID() {
+        return orderDriverID;
+    }
+
+    public void setOrderDriverUsername(String orderDriverUsername) {
+        this.orderDriverUsername = orderDriverUsername;
+    }
+
+    public String getCustID() {
+        return custID;
+    }
+
+    public void setCustID(String custID) {
+        this.custID = custID;
+    }
+
+    public void setOrderDriverID(String orderDriverID) {
+        this.orderDriverID = orderDriverID;
+    }
+
+    public String getOrderGross() {
+        return orderGross;
+    }
+
+    public String getPromo() {
+        return promo;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public String getOrderVAT() {
+        return orderVAT;
+    }
+
+    public void setOrderGross(String orderGross) {
+        this.orderGross = orderGross;
+    }
+
+    public void setPromo(String promo) {
+        this.promo = promo;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+    public void setOrderVAT(String orderVAT) {
+        this.orderVAT = orderVAT;
     }
 
     public String getCashOnHand() {

@@ -36,6 +36,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -129,7 +131,6 @@ public class Register extends AppCompatActivity {
         }
 
 
-
             final ProgressDialog dialog = new ProgressDialog(this);
             dialog.setMessage("Registering user . . . ");
             dialog.show();
@@ -147,7 +148,6 @@ public class Register extends AppCompatActivity {
                     final String cust_contact = etContactNum.getText().toString().trim();
                     final String cust_Username = etUsername.getText().toString().trim();
                     final String imageURL = taskSnapshot.getDownloadUrl().toString();
-                    final String uploadID = databaseReference.push().getKey();
 
                     firebaseAuth.createUserWithEmailAndPassword(cust_email,cust_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -155,7 +155,8 @@ public class Register extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 FirebaseUser fbu = FirebaseAuth.getInstance().getCurrentUser();
                                 String uID = fbu.getUid();
-                                CustomerInformation  CustInfo =  new CustomerInformation(cust_email,cust_contact,cust_address,imageURL,cust_Username,uID);
+                                CustomerInformation  CustInfo =  new CustomerInformation(cust_email,cust_contact,cust_address,imageURL,cust_Username,uID,"0");
+
                                 databaseReference.child(uID).setValue(CustInfo);
                                 etUsername.setText("");
                                 etPassword.setText("");

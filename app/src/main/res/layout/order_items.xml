@@ -16,7 +16,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/common_ic_googleplayservices"
+        app:srcCompat="@drawable/ic_menu_camera"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/tvOrderProdQuantity" />
 

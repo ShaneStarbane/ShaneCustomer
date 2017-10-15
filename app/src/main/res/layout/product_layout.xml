@@ -154,4 +154,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/tvID2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvProdCategory"
+        android:layout_alignStart="@+id/tvProdID"
+        android:text="TextView"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/tvCategory2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tvProdCategory"
+        android:layout_alignStart="@+id/tvProdID"
+        android:text="TextView"
+        android:visibility="invisible" />
+
 </RelativeLayout>

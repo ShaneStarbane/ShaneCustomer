@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyCart extends AppCompatActivity {
-    DatabaseReference mDatabaseReference;
+    DatabaseReference mDatabaseReference,billDBF;
     ListView lvOrders;
     TextView tvCartKey,tvNothingMessage,tvSubTotalLabel;
     Button btnCheckOut;
@@ -43,14 +43,25 @@ public class MyCart extends AppCompatActivity {
         lvOrders = (ListView) findViewById(R.id.lvOrders);
         btnCheckOut = (Button) findViewById(R.id.btnCheckOut);
         tvNothingMessage = (TextView) findViewById(R.id.tvNothingMessage);
-
-        if(intent.hasExtra("cartKey")) {
             final String cartKey = intent.getStringExtra("cartKey");
             tvCartKey.setText(cartKey);
-            if(intent.hasExtra("currentBill")){
-                String theBill = intent.getStringExtra("currentBill");
+
+        billDBF = FirebaseDatabase.getInstance().getReference("Orders").child("All Orders").child(cartKey);
+        billDBF.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String theBill = dataSnapshot.child("orderGross").getValue().toString();
                 tvSubTotalLabel.setText(theBill);
+
             }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
 
             final String currentCartKey = tvCartKey.getText().toString();
@@ -83,14 +94,28 @@ public class MyCart extends AppCompatActivity {
                 btnCheckOut.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(!TextUtils.equals(tvSubTotalLabel.getText().toString(),"default")) {
 
+                            Intent thisIntent = getIntent();
+                            String user = thisIntent.getStringExtra("user");
+
+                            String cartKey = intent.getStringExtra("cartKey");
+                            Intent checkOutPhase = new Intent(getApplicationContext(), CheckOut.class);
+                            checkOutPhase.putExtra("cartKey", cartKey);
+                            checkOutPhase.putExtra("user", user);
+                            if (intent.hasExtra("currentBill")) {
+                                String theBill = intent.getStringExtra("currentBill");
+                                checkOutPhase.putExtra("currentBill", theBill);
+                            }
+                            startActivity(checkOutPhase);
+                        }else {
                             Toast.makeText(getApplicationContext(), "No orders to check out.", Toast.LENGTH_SHORT).show();
-
+                        }
                     }
                 });
             }
         }
-    }
+
 //Change1
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -98,9 +123,12 @@ public class MyCart extends AppCompatActivity {
 
                 Intent thisIntent = getIntent();
                 String user = thisIntent.getStringExtra("user");
+                String cartKey = tvCartKey.getText().toString();
                 Intent back = new Intent(getApplicationContext(),MainActivity.class);
                 back.putExtra("user",user);
-                startActivity(back);
+                back.putExtra("cartKey",cartKey);
+
+            startActivity(back);
         }
         return super.onKeyDown(keyCode, event);
     }

@@ -11,24 +11,31 @@ public class CustomerInformation {
     public String custImageUrl;
     public String custUsername;
     public String custID;
+    public String timesCancelled;
 
 
     public CustomerInformation(String cust_email, String cust_contact, String cust_address){
 
     }
 
-    public CustomerInformation(String custEmail, String custContact, String custAddress, String custImageUrl, String custUsername, String custID) {
+    public CustomerInformation(String custEmail, String custContact, String custAddress, String custImageUrl, String custUsername, String custID,String timesCancelled) {
         this.custEmail = custEmail;
         this.custContact = custContact;
         this.custAddress = custAddress;
         this.custImageUrl = custImageUrl;
         this.custUsername = custUsername;
         this.custID = custID;
+        this.timesCancelled = timesCancelled;
 
+    }
+
+    public String getTimesCancelled() {
+        return timesCancelled;
     }
 
     public String getCustID() {
         return custID;
+
     }
 
     public String getCustEmail() {

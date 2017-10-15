@@ -27,6 +27,7 @@ public class CheckOut extends AppCompatActivity {
     DatabaseReference allOrdersDBF;
     DatabaseReference pendingOrdersDBF;
     DatabaseReference customersDBF;
+    DatabaseReference billDBF;
     EditText etCOCashOnHand,etCOAddress,etCONote;
 
 
@@ -37,7 +38,7 @@ public class CheckOut extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_out);
         final Intent thisIntent = getIntent();
-        NumberFormat formatter = new DecimalFormat("#0.00");
+        final NumberFormat formatter = new DecimalFormat("#0.00");
         String user = thisIntent.getStringExtra("user");
         pendingOrdersDBF = FirebaseDatabase.getInstance().getReference("Orders").child("Pending Orders");
         customersDBF = FirebaseDatabase.getInstance().getReference("Customers").child(user);
@@ -59,18 +60,34 @@ public class CheckOut extends AppCompatActivity {
 
 
 
-
-        if(thisIntent.hasExtra("cartKey")){
             String theKey = thisIntent.getStringExtra("cartKey");
             tvCartKey.setText(theKey);
-        }
-        if(thisIntent.hasExtra("currentBill")){
-            String theBill = thisIntent.getStringExtra("currentBill");
-            double Bill = Double.parseDouble(theBill);
-            double vatBill = Bill *.12;
-            VAT.setText(String.valueOf(formatter.format(vatBill)));
-            Gross.setText(theBill);
-        }
+
+
+            billDBF = FirebaseDatabase.getInstance().getReference("Orders").child("All Orders").child(theKey);
+            billDBF.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String theBill = dataSnapshot.child("orderGross").getValue().toString();
+                    String theVAT = dataSnapshot.child("orderVAT").getValue().toString();
+                    VAT.setText(theVAT);
+                    Gross.setText(theBill);
+                    double gross = Double.parseDouble(theBill);
+                    double vat  = Double.parseDouble(theVAT);
+                    double billAddedVAT = gross+vat;
+                    TotalBill.setText(String.valueOf(formatter.format(billAddedVAT)));
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
+
+
 
         Promo.setText("0.00");
         Discount.setText("0.00");
@@ -92,8 +109,7 @@ public class CheckOut extends AppCompatActivity {
 
 
 
-        double billAddedVAT = Double.parseDouble(Gross.getText().toString()) +  Double.parseDouble(VAT.getText().toString());
-        TotalBill.setText(String.valueOf(formatter.format(billAddedVAT)));
+
 
         if(thisIntent.hasExtra("promoPile")){
             String promos = thisIntent.getStringExtra("promoPile");
@@ -131,7 +147,12 @@ public class CheckOut extends AppCompatActivity {
                     String uID = customersDBF.push().getKey();
                     customersDBF.child("order(s)").child(uID).setValue(addToHistory);
 
+                    Intent orderPlaced = new Intent(getApplicationContext(),OrderPlaced.class);
+                    orderPlaced.putExtra("user",user);
+                    startActivity(orderPlaced);
+
                 }
+
             }
         });
     }
