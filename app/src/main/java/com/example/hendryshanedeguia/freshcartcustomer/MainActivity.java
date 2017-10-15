@@ -22,11 +22,13 @@ import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.hendryshanedeguia.freshcartcustomer.R.styleable.NavigationView;
 import static com.google.firebase.database.FirebaseDatabase.getInstance;
 
 public class MainActivity extends AppCompatActivity
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity
     public ListView lv;
     private ProductListAdapter adapter;
     private ProgressDialog progressDialog;
+    DatabaseReference testDBF;
+    String testString;
 
 
     @Override
@@ -127,6 +131,23 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+        testString = "Shane";
+
+        testDBF = FirebaseDatabase.getInstance().getReference("Products").child("Bakery").child("-Kw48xKcqShcNeQ__O5F");
+        testDBF.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                testString = dataSnapshot.child("prodName").getValue().toString();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        Toast.makeText(getApplicationContext(), testString, Toast.LENGTH_SHORT).show();
+
 
     }
 

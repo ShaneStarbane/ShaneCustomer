@@ -21,14 +21,14 @@ public class OrderInformation {
     public String orderDriverID;
     public String custID;
     public String orderEntryID;
-
+    public String numberOfItems;
 
 
 
 
     public OrderInformation() {
     }
-    public OrderInformation(String orderID, String orderGross, String custContact, String custAddress, String custImageUrl, String custUsername,String orderStatus,String cashOnHand, String noteForDriver, String promo, String discount,String orderVAT, String orderDriverUsername,String orderDriverID,String custID,String orderEntryID) {
+    public OrderInformation(String orderID, String orderGross, String custContact, String custAddress, String custImageUrl, String custUsername,String orderStatus,String cashOnHand, String noteForDriver, String promo, String discount,String orderVAT, String orderDriverUsername,String orderDriverID,String custID,String orderEntryID,String numberOfItems) {
         this.orderID = orderID;
         this.orderGross = orderGross;
         this.custContact = custContact;
@@ -45,8 +45,12 @@ public class OrderInformation {
         this.orderDriverID = orderDriverID;
         this.custID = custID;
         this.orderEntryID = orderEntryID;
+        this.numberOfItems = numberOfItems;
     }
 
+    public void setNumberOfItems(String numberOfItems) {
+        this.numberOfItems = numberOfItems;
+    }
 
     public String getOrderEntryID() {
         return orderEntryID;
@@ -54,6 +58,10 @@ public class OrderInformation {
 
     public void setOrderEntryID(String orderEntryID) {
         this.orderEntryID = orderEntryID;
+    }
+
+    public String getNumberOfItems() {
+        return numberOfItems;
     }
 
     public String getOrderDriverUsername() {

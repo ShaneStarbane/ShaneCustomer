@@ -197,7 +197,7 @@
         app:layout_constraintVertical_bias="0.014" />
 
     <TextView
-        android:id="@+id/tvCurrentStock"
+        android:id="@+id/tvCurrentNumberOfItems"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

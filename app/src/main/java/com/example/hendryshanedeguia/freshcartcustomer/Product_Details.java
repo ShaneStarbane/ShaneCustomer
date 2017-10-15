@@ -33,12 +33,12 @@ public class Product_Details extends AppCompatActivity {
     public DatabaseReference IndividualTempDBF;
     public DatabaseReference customerDBF;
     public  DatabaseReference billDBF;
-    public  DatabaseReference prodDatabase;
+    public  DatabaseReference numberOfOrders;
 
 
     private ProductListAdapter adapter;
     private StorageReference mStoraRef;
-    TextView tvName,tvDes,tvPrice,tvCurrency,tvProdID,tvProdCategory,tvCartKeyProdDetails,tvTotalBill,tvCurrentStock;
+    TextView tvName,tvDes,tvPrice,tvCurrency,tvProdID,tvProdCategory,tvCartKeyProdDetails,tvTotalBill,tvCurrentNumberOfItems;
     ImageView ivPic;
     Button btnIncrease,btnDecrease,btnAdd,btnContinue;
     EditText etQuantity;
@@ -57,7 +57,7 @@ public class Product_Details extends AppCompatActivity {
         customerDBF = FirebaseDatabase.getInstance().getReference().child("Customers").child(user);
         final Intent intent = getIntent();
 
-        tvCurrentStock = (TextView) findViewById(R.id.tvCurrentStock);
+        tvCurrentNumberOfItems = (TextView) findViewById(R.id.tvCurrentNumberOfItems);
         tvName = (TextView) findViewById(R.id.tvName);
          tvDes = (TextView) findViewById(R.id.tvDescription);
          tvPrice = (TextView) findViewById(R.id.tvPriceDetail);
@@ -72,23 +72,6 @@ public class Product_Details extends AppCompatActivity {
          btnContinue = (Button)findViewById(R.id.btnContinue);
          etQuantity = (EditText)findViewById(R.id.etQuantity);
          tvCartKeyProdDetails = (TextView) findViewById(R.id.tvCartKeyProdDetials);
-        prodDatabase = FirebaseDatabase.getInstance().getReference("Products").child(category).child(prodID);
-        prodDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String qty = dataSnapshot.child("prodStock").getValue().toString();
-                tvCurrentStock.setText(qty);
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-         etQuantity.setText("0");
         if(intent.hasExtra("cartKey")){
             String cartKey = intent.getStringExtra("cartKey");
             tvCartKeyProdDetails.setText(cartKey);
@@ -108,6 +91,22 @@ public class Product_Details extends AppCompatActivity {
             });
 
         }
+        numberOfOrders = FirebaseDatabase.getInstance().getReference("Orders").child("All Orders").child(tvCartKeyProdDetails.getText().toString());
+        numberOfOrders.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String numOfItems = dataSnapshot.child("numberOfItems").getValue().toString();
+                tvCurrentNumberOfItems.setText(numOfItems);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+         etQuantity.setText("0");
+
         final String prodName = intent.getStringExtra("prodName");
         String prodDes = intent.getStringExtra("prodDes");
         final String prodPrice = intent.getStringExtra("prodPrice");
@@ -151,27 +150,12 @@ public class Product_Details extends AppCompatActivity {
                 String user = thisIntent.getStringExtra("user");
                 String category = thisIntent.getStringExtra("prodCategory");
                 String prodID = thisIntent.getStringExtra("prodID");
-                prodDatabase = FirebaseDatabase.getInstance().getReference("Products").child(category).child(prodID);
-                prodDatabase.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String qty = dataSnapshot.child("prodStock").getValue().toString();
-                        tvCurrentStock.setText(qty);
-
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
 
                 FirebaseUser fbu = FirebaseAuth.getInstance().getCurrentUser();
                 String userID =fbu.getUid();
                 final String currentCartKey = tvCartKeyProdDetails.getText().toString();
                 final NumberFormat formatter = new DecimalFormat("#0.00");
-                //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                 if(TextUtils.equals(currentCartKey,"default")){
 
                     String uploadID = IndividualTempDBF.push().getKey();
@@ -185,23 +169,10 @@ public class Product_Details extends AppCompatActivity {
                         double priceVAT = newValue* .12;
 
                     //Store
-                    OrderInformation oi = new OrderInformation(uploadID,String.valueOf(newValue),"null","null","null","Shane","null","null","null","0.00","0.00",String.valueOf(formatter.format(priceVAT)),"null","null",userID,"null");
+                    OrderInformation oi = new OrderInformation(uploadID,String.valueOf(newValue),"null","null","null","Shane","null","null","null","0.00","0.00",String.valueOf(formatter.format(priceVAT)),"null","null",userID,"null","1");
                     IndividualOrderInfo ioi = new IndividualOrderInfo(etQuantity.getText().toString(),prodName,prodPrice,uploadID,imageURL,totalPriceConverted,category,prodID);
                     tempDBF.child("All Orders").child(uploadID).setValue(oi);
                     IndividualTempDBF.child("All Orders").child(uploadID).child("order(s)").child(uploadID).setValue(ioi);
-
-                    double stock = Double.parseDouble(tvCurrentStock.getText().toString());
-                    double tobeMinused = Double.parseDouble(etQuantity.getText().toString());
-                    double minusedStock = stock -tobeMinused;
-
-                    Map updateStuff = new HashMap();
-                    updateStuff.put("prodStock",String.valueOf(minusedStock));
-                    prodDatabase.updateChildren(updateStuff);
-
-
-
-
-
                 }
                 //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                 if(!TextUtils.equals(currentCartKey,"default")){
@@ -218,45 +189,25 @@ public class Product_Details extends AppCompatActivity {
                         double newValue = totalPrice + totalBill;
                         double newVAT = newValue *.12;
 
+                        double totalNumItems = Double.parseDouble(tvCurrentNumberOfItems.getText().toString());
+                        double newValueItems = totalNumItems + 1;
+                        String newValueString = String.valueOf(newValueItems);
                         tvTotalBill.setText(String.valueOf(formatter.format(newValue)));
                         Map currentCart = new HashMap();
                         currentCart.put("orderGross",tvTotalBill.getText().toString());
                         currentCart.put("orderVAT",String.valueOf(formatter.format(newVAT)));
+                        currentCart.put("numberOfItems",newValueString);
                         billDBF.updateChildren(currentCart);
+
                     //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
                     IndividualOrderInfo ioi = new IndividualOrderInfo(etQuantity.getText().toString(),prodName,prodPrice,uploadID,imageURL,totalPriceConverted,category,prodID);
+
                     IndividualTempDBF.child("All Orders").child(currentCartKey).child("order(s)").child(uploadID).setValue(ioi);
-                    prodDatabase = FirebaseDatabase.getInstance().getReference("Products").child(category).child(prodID);
-                    prodDatabase.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            String qty = dataSnapshot.child("prodStock").getValue().toString();
-                            tvCurrentStock.setText(qty);
-
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                    double stock = Double.parseDouble(tvCurrentStock.getText().toString());
-                    double tobeMinused = Double.parseDouble(etQuantity.getText().toString());
-                    double minusedStock = stock -tobeMinused;
-
-                    Map updateStuff = new HashMap();
-                    updateStuff.put("prodStock",String.valueOf(minusedStock));
-                    prodDatabase.updateChildren(updateStuff);
 
                 }
 
 
                 Intent nextPhase = new Intent(getApplicationContext(),MyCart.class);
-
-
-
-
                 nextPhase.putExtra("user",user);
                 nextPhase.putExtra("cartKey",tvCartKeyProdDetails.getText(). toString());
                 nextPhase.putExtra("prodCategory",category);
